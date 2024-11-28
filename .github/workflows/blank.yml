@@ -1,0 +1,47 @@
+name: BugBug Test Runner
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+  # Permite ejecutar el workflow manualmente desde la interfaz de GitHub
+  workflow_dispatch:
+
+jobs:
+  run-bugbug-tests:
+    runs-on: ubuntu-latest
+    name: Run BugBug Tests
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run BugBug Cloud Runner
+        id: run-bugbug-tests
+        uses: bugbug-io/bugbug-github-action@v1.2.1
+        with:
+          apiToken: ${{ secrets.BUGBUG_API_TOKEN }}
+          testId: "1cee2786-581f-4b2d-9d5b-ad94c15cccc0" 
+          suiteId: "ce92622b-0002-41c9-b97d-b74613eb5000"
+          profileName: "HayStocks"
+          variables: |
+            BASE_URL=https://staging.yourapp.com,
+            TEST_USER=test@example.com,
+            TEST_PASSWORD=secretpass
+          debug: "true"
+
+      - name: Log Test Results
+        run: |
+          echo "Suite Run ID: ${{ steps.run-bugbug-tests.outputs.suiteRunId }}"
+          echo "Test Run ID: ${{ steps.run-bugbug-tests.outputs.testRunId }}"
+          
+      - name: Check Test Status
+        if: always()
+        run: |
+          if [ "${{ steps.run-bugbug-tests.outcome }}" == "success" ]; then
+            echo "✅ BugBug tests passed successfully!"
+          else
+            echo "❌ BugBug tests failed. Check the test results for more details."
+            exit 1
+          fi
