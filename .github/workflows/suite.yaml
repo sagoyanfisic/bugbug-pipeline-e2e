@@ -1,0 +1,27 @@
+name: BugBug Test Runner
+
+on:
+  # Permite ejecutar el workflow manualmente desde la interfaz de GitHub
+  workflow_dispatch:
+
+jobs:
+  run-bugbug-tests:
+    runs-on: ubuntu-latest
+    name: Run BugBug Tests
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+     
+      - name: test
+        shell: bash
+        run: |
+          npm install -g @testrevolution/bugbug-cli && \
+            bugbug config set-token \
+            ${{ secrets.BUGBUG_API_TOKEN }}
+      
+      - name: suite 
+        shell: bash
+        run: |
+          bugbug remote run suite ce92622b-0002-41c9-b97d-b74613eb5000
