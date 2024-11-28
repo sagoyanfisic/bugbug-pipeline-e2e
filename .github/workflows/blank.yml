@@ -1,10 +1,6 @@
 name: BugBug Test Runner
 
 on:
-  push:
-    branches: [ "main", "develop" ]
-  pull_request:
-    branches: [ "main", "develop" ]
   # Permite ejecutar el workflow manualmente desde la interfaz de GitHub
   workflow_dispatch:
 
@@ -24,11 +20,8 @@ jobs:
           apiToken: ${{ secrets.BUGBUG_API_TOKEN }}
           testId: "1cee2786-581f-4b2d-9d5b-ad94c15cccc0" 
           suiteId: "ce92622b-0002-41c9-b97d-b74613eb5000"
-          profileName: "HayStocks"
-          variables: |
-            BASE_URL=https://staging.yourapp.com,
-            TEST_USER=test@example.com,
-            TEST_PASSWORD=secretpass
+          profileName: "Default"
+          
           debug: "true"
 
       - name: Log Test Results
