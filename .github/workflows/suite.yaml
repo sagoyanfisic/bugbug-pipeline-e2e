@@ -1,4 +1,4 @@
-name: BugBug Test Runner
+name: Suite
 
 on:
   # Permite ejecutar el workflow manualmente desde la interfaz de GitHub
@@ -24,4 +24,4 @@ jobs:
       - name: suite 
         shell: bash
         run: |
-          bugbug remote run suite ce92622b-0002-41c9-b97d-b74613eb5000
+          bugbug remote run suite f37eafb1-bbfd-41a2-9fb3-27640ccb8b05
