@@ -18,3 +18,6 @@ jobs:
           echo $DATE
           echo "Date=$DATE"
           echo "date=$DATE" >> $GITHUB_OUTPUT
+      - name: test
+        run: | 
+          echo "hola" 
