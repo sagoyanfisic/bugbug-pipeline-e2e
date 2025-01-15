@@ -1,31 +1,23 @@
-name: Check Unit Test In Progress
+name: Check Unit Test In Progress 2
 
 on:
   pull_request:
     branches:
       - develop
-      - '!staging'
-      - '!master'
-      - '!feature/*'
-      - '!feature/**'
-      - '!feat/*'
-      - '!feat/**'
-      - '!fix/*'
-      - '!fix/**'
-
-env:
-  DISABLE_CHECK: ${{ vars.DISABLE_UNIT_TEST_CHECK }}
 
 jobs:
   check-unit-test-progress:
-    if: ${{ env.DISABLE_CHECK != 'true' }}
+    if: ${{ vars.DISABLE_UNIT_TEST_CHECK != 'true' }}
     runs-on: ubuntu-latest
     
     steps:
-    - name: Get current date
-      id: get_date
-      run: |
-        export DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-        echo $DATE
-        echo "Date=$DATE"
-        echo "date=$DATE" >> $GITHUB_OUTPUT
+      - name: Get current date
+        id: get_date
+        run: |
+          export DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo $DATE
+          echo "Date=$DATE"
+          echo "date=$DATE" >> $GITHUB_OUTPUT
+      - name: test
+        run: | 
+          echo "hola" 
