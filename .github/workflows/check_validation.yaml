@@ -18,7 +18,7 @@ env:
 
 jobs:
   check-unit-test-progress:
-    if: ${{ env.DISABLE_CHECK != 'true' }}
+    if: ${{ vars.DISABLE_UNIT_TEST_CHECK != 'true' }}
     runs-on: ubuntu-latest
     
     steps:
