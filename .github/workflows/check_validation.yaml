@@ -4,17 +4,6 @@ on:
   pull_request:
     branches:
       - develop
-      - '!staging'
-      - '!master'
-      - '!feature/*'
-      - '!feature/**'
-      - '!feat/*'
-      - '!feat/**'
-      - '!fix/*'
-      - '!fix/**'
-
-env:
-  DISABLE_CHECK: ${{ vars.DISABLE_UNIT_TEST_CHECK }}
 
 jobs:
   check-unit-test-progress:
